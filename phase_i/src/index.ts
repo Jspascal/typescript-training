@@ -46,6 +46,8 @@ async function main() {
     const comment1 = await commentService.createComment(commentData[0]);
     const comment2 = await commentService.createComment(commentData[1]);
 
+    console.log("First comment: ", comment1);
+
     const searchResults = postService.searchPosts("First", {});
     console.log(
       "Search Results:",
@@ -63,9 +65,9 @@ async function main() {
     );
 
     console.log(
-      "Comments for Post 1:",
+      "Comments for Post 2:",
       JSON.stringify(
-        (await commentService.listComments({ postId: post1.id })).items,
+        (await commentService.listComments({ postId: post2.id })).items,
         null,
         2
       )
