@@ -30,8 +30,8 @@ export class PostService implements IPostService {
 
   async createPost(data: CreatePostDTO): Promise<BlogPost> {
     const newPost: BlogPost = new BlogPost(
-      "Post Title",
-      "Post content goes here.",
+      data.title,
+      data.content,
       data.authorId,
       data.tags,
       new Date(),
