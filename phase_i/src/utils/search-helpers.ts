@@ -3,18 +3,18 @@ import { SearchResult } from "../types/common.types";
 
 export function searchPosts(query: string, posts: BlogPost[]): SearchResult[] {
   const keywords = query.toLowerCase().split(" ");
-
   return posts
-    .filter(
-      (post) =>
-        post.title.toLowerCase().includes(query.toLowerCase()) ||
-        post.content.toLowerCase().includes(query.toLowerCase())
-    )
+    .filter((post) => {
+      const titleMatch = post.title.toLowerCase().includes(query.toLowerCase());
+      const contentMatch = post.content
+        .toLowerCase()
+        .includes(query.toLowerCase());
+      return titleMatch || contentMatch;
+    })
     .map((post) => {
       const relevanceScore = calculateRelevanceScore(post, keywords);
       const matchedTerms = extractMatchedTerms(post, keywords);
       const highlightedContent = highlightKeywords(post.content, matchedTerms);
-
       return {
         post: post,
         relevanceScore: relevanceScore,
