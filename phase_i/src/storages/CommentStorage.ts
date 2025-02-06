@@ -36,8 +36,9 @@ export class CommentStorage {
   }
 
   findByPostId(postId: string): PostComment[] {
-    return Array.from(this.comments.values()).filter(
-      (comment) => comment.postId === postId
-    );
+    const allComments = Array.from(this.comments.values());
+    return allComments.filter((comment) => {
+      return comment.postId.toLowerCase().includes(postId.toLowerCase());
+    });
   }
 }
